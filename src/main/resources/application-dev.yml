@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://fsdfsdffdfdff.mysql.rds.aliyuncs.com:3306/wx_db
+    username: zhang
+    password: Qq257894613
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: zzzjoy.dao
+
+
+#测试微信
+wx:
+  app-id: wx7c2de87d3818f945
+  secret: d87271c15c7a3c315b6265f13333a423
+  token: weixin
+  limitTimes: 20
+
+jwc:
+  aesKey: XASEqd212fq12121#!12098
+  jwc-service: https://service-gxbypvnn-1258789406.sh.apigw.tencentcs.com/release/old_jwc_handle

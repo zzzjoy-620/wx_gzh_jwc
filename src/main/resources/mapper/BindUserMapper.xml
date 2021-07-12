@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="zzzjoy.dao.BindUserMapper">
+    <insert id="insertJwcUser" parameterType="zzzjoy.bean.JwcUser">
+        insert into jwc_user (openid, username, password, creat_time)
+        VALUES (#{openId}, #{username}, #{password}, #{creatTime})
+    </insert>
+
+    <select id="selectJwcUserByOpenId" resultType="zzzjoy.bean.JwcUser">
+        select openid as openId, username as username ,password as password, creat_time as creatTime
+        from jwc_user where openid = '${openId}'
+    </select>
+
+    <update id="updateJwcUser" parameterType="zzzjoy.bean.JwcUser">
+        update jwc_user
+        set password = #{password},username = #{username}, creat_time = #{creatTime}
+        where openid = #{openId}
+    </update>
+
+</mapper>

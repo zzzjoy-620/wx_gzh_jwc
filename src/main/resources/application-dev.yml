@@ -5,9 +5,9 @@ server:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://fsdfsdffdfdff.mysql.rds.aliyuncs.com:3306/wx_db
-    username: zhang
-    password: Qq257894613
+    url: jdbc:mysql://fss.com:3306/wx_db
+    username: z
+    password: Q
 
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
@@ -16,12 +16,12 @@ mybatis:
 
 #测试平台
 wx:
-  app-id: wx7c2de87d3818f945
-  secret: d87271c15c7a3c315b6265f13333a423
-  token: weixin
+  app-id: wx7c2
+  secret: d87271c
+  token: w
   limitTimes: 20
   frozenTime: 3
 
 jwc:
-  aesKey: XASEqd212fq12121#!12098
-  jwc-service: http://120.27.224.160/main_handle
+  aesKey: XASEqd212fq1
+  jwc-service: http:///main_handle

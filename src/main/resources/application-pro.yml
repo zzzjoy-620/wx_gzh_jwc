@@ -12,21 +12,21 @@ logging:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://fsdfsdffdfdff.mysql.rds.aliyuncs.com:3306/wx_db
-    username: zhang
-    password: Qq257894613
+    url: jdbc:mysql://fsdfsdffdffsfffdff.mysql.rds.aliyuncs.com:3306/wx_db
+    username: zh
+    password: 123456
 
 mybatis:
   mapper-locations: classpath:/mapper/*.xml
   type-aliases-package: zzzjoy.dao
 
 wx:
-  app-id: wx47633dc3a33b6294
-  secret: 185b32d2a3b00bc1696040eebbccc9bc
+  app-id: wx47633dc3
+  secret: 185b32d2ac
   token: weixin
   limitTimes: 20
   frozenTime: 3
 
 jwc:
-  aesKey: XASEqd212fq12121#!12098
-  jwc-service: https://service-gxbypvnn-1258789406.sh.apigw.tencentcs.com/release/old_jwc_handle
+  aesKey: XASEqd21
+  jwc-service: https://servics.com/release/old_jwc_handle

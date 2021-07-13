@@ -18,11 +18,6 @@ public class JwcUser {
     private String openId;
     private String username;
     private String password;
-
     private Timestamp creatTime;
-
-//    Date dNow = new Date( );
-//    SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
-
 
 }

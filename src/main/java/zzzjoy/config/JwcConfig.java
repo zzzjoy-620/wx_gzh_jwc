@@ -11,5 +11,6 @@ import org.springframework.stereotype.Component;
 public class JwcConfig {
     // 保存在数据库的加密密钥
     private String aeskey;
+    // jwc查询的serviceUrl
     private String JwcService;
 }

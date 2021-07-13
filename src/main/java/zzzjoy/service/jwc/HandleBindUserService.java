@@ -16,7 +16,15 @@ public class HandleBindUserService {
     @Autowired
     private BindUserServiceImpl bindUserService;
 
+    /**
+     * @Author zzzjoy
+     * @Description
+     * @Param content 绑定字段
+     * @Param openId 用户的openId
+     * @Return
+    */
     public String handleBindUser(String content, String openId){
+        // 获取绑定字段的学号和密码
         String username = RegexUtils.getUserList(content).get(0).get(0);
         String password = RegexUtils.getUserList(content).get(0).get(1);
         String returnMsg = null;

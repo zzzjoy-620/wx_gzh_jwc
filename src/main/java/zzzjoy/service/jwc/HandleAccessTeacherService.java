@@ -28,6 +28,12 @@ public class HandleAccessTeacherService {
     @Autowired
     private JwcConfig jwcConfig;
 
+    /**
+     * @Author zzzjoy
+     * @Description 处理评教信息
+     * @Param openId 用户的openId
+     * @Return  要发送给微信消息的content
+    */
     public String handleAccessTeacher(String openId){
         String returnMsg = null;
         String jwcService = jwcConfig.getJwcService();
@@ -57,7 +63,10 @@ public class HandleAccessTeacherService {
                     Timestamp timestamp = Timestamp.valueOf(ft);
                     ReceiveData receiveData = new ReceiveData(code, msg, service, service_ip, data, timestamp);
 
-                    if (code.equals("200")){
+                    if (code == null){
+                        returnMsg = "评教失败:02，请联系开发者。";
+                    }
+                    else if (code.equals("200")){
                         returnMsg = data;
                         // 存入数据
                         receiveDataService.addReceiveData(receiveData);
@@ -66,11 +75,12 @@ public class HandleAccessTeacherService {
                         returnMsg = "评教失败，教务处访问失败。";
                     }
                     else if (code.equals("403")){
-                        returnMsg = "查询失败，验证码自动识别失败或是密码错误，请重试。";
+                        returnMsg = "评教失败，验证码自动识别失败或是密码错误，请重试。";
                     }
                     else {
                         returnMsg = "评教失败:05，请联系开发者。";
                     }
+
                 } catch (IOException e) {
                     returnMsg = "评教失败:03，请联系开发者。";
                 }

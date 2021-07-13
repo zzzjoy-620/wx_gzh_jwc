@@ -28,8 +28,15 @@ public class HandleQueryScoreService {
     private JwcConfig jwcConfig;
 
 
+    /**
+     * @Author zzzjoy
+     * @Description 处理查成绩信息
+     * @Param openId 用户的openId
+     * @Return 要发送给微信消息的content内容
+    */
     public String handleQueryScore(String openId) {
         String returnMsg = null;
+        // 获取api的url
         String jwcService = jwcConfig.getJwcService();
         if (bindUserService.existOpenId(openId)) {
             List<JwcUser> jwcUserList = bindUserService.findJwcUserByOpenId(openId);

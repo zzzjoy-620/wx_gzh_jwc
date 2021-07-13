@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zzzjoy.bean.message.ToTextMessage;
 import zzzjoy.constant.WxConstant;
-import zzzjoy.service.impl.TextMessageServiceImpl;
 import zzzjoy.service.jwc.HandleAccessTeacherService;
 import zzzjoy.service.jwc.HandleBindUserService;
 import zzzjoy.service.jwc.HandleQueryScoreService;
@@ -15,7 +14,7 @@ import java.util.Map;
 @Service
 public class TextService {
     @Autowired
-    private TextMessageServiceImpl textMessageService;
+    private TextMessageService textMessageService;
     @Autowired
     private HandleBindUserService handleBindUserService;
     @Autowired
@@ -23,6 +22,12 @@ public class TextService {
     @Autowired
     private HandleQueryScoreService handleQueryScoreService;
 
+    /**
+     * @Author zzzjoy
+     * @Description 处理收到的文字map消息并返回xml消息
+     * @Param fromMap 收到的map消息
+     * @Return  回复的xml消息
+    */
     public String handleService(Map<String, String> fromMap){
         String content = fromMap.get(WxConstant.CONTENT);
         String openId = fromMap.get(WxConstant.FROM_USER_NAME);
@@ -52,8 +57,9 @@ public class TextService {
             return textMessageService.sendMessage(new ToTextMessage(fromMap,msg));
         }
 
-        //用户回复绑定信息
+        //用户绑定信息
         else if (RegexUtils.getUserList(content).size() == 1){
+            // 这里写绑定的业务逻辑
             msg = handleBindUserService.handleBindUser(content,openId);
             return textMessageService.sendMessage(new ToTextMessage(fromMap,msg));
         }

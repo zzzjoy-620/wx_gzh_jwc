@@ -21,12 +21,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private AccessTokenService accessTokenService;
 
+    /**
+     * @Author zzzjoy
+     * @Description 通过openId查询baseUser
+     * @Param openId 用户的openId
+     * @Return baseUser对象
+    */
     public User getUserByURL(String openId) throws IOException {
         // get数据准备
         HashMap<String, String> map = new HashMap<>();
         map.put("access_token", accessTokenService.getAccessToken());
         map.put("openid", openId);
         map.put("lang", "zh_CN");
+        // 普通公众号没有权限获取用户全部信息，此api接口无效
         String userBaseInfo_URL = "https://api.weixin.qq.com/cgi-bin/user/info";
         String respond = HttpClientUtils.get(userBaseInfo_URL, map);
         JSONObject jsonObject = JSONObject.parseObject(respond);
@@ -56,9 +63,8 @@ public class UserServiceImpl implements UserService {
     public int addUser(String openId) throws IOException {
         if (this.findUserByOpenId(openId).size() != 0)
             return 0;
-        return addUser(getUserByURL(openId));
+        return this.addUser(getUserByURL(openId));
     }
-
     @Override
     public int addUser(User user) {
         return userMapper.insertUser(user);

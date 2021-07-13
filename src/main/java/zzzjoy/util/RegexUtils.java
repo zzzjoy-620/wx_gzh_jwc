@@ -30,7 +30,7 @@ public class RegexUtils {
     public static boolean matchACCESS_TEACHER(String content){
         return Pattern.matches(ACCESS_TEACHER, content);
     }
-
+    // 获取评教字段的信息
     public static List<List<String>> getUserList(String content){
         List<List<String>> userList = new ArrayList<>();
         Pattern pattern = Pattern.compile(BIND_USER);

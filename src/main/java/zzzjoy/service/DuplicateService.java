@@ -13,14 +13,20 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class DuplicateMessageService {
+public class DuplicateService {
+
     public static final List<DuplicateMessage> MSGS = new ArrayList<>();
     public static final List<String> USERS = new ArrayList<>();
-
 
     @Autowired
     private WxBaseConfig wxBaseConfig;
 
+    /**
+     * @Author zzzjoy
+     * @Description 检查是不是微信发的重复消息
+     * @Param fromMap 收到的消息map
+     * @Return 是否是重复的消息
+    */
     public boolean checkDuplicateMsg(Map<String, String> fromMap){
         String fromUserName = fromMap.get(WxConstant.FROM_USER_NAME);
         String createTime = fromMap.get(WxConstant.CREATE_TIME);
@@ -35,6 +41,12 @@ public class DuplicateMessageService {
         }
     }
 
+    /**
+     * @Author zzzjoy
+     * @Description 检查是不是短时间内重复发消息的用户
+     * @Param fromMap 收到的消息map
+     * @Return 是否是重复的用户
+    */
     public boolean checkDuplicateUser(Map<String, String> fromMap){
         String user = fromMap.get(WxConstant.FROM_USER_NAME);
         int count = Collections.frequency(USERS, user);
@@ -48,12 +60,24 @@ public class DuplicateMessageService {
     }
 
 
+    /**
+     * @Author zzzjoy
+     * @Description 定时刷新USERS
+     * @Param
+     * @Return
+    */
     @Scheduled(fixedRate = 180000)
     public void clearUSERS(){
         USERS.clear();
     }
 
 
+    /**
+     * @Author zzzjoy
+     * @Description 定时刷新 MSGS
+     * @Param
+     * @Return
+     */
     @Scheduled(fixedRate = 300000)
     public void clearMSGS(){
         DuplicateMessage duplicateMessage = null;

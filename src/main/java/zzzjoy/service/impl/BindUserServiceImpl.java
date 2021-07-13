@@ -4,13 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zzzjoy.bean.JwcUser;
 import zzzjoy.config.JwcConfig;
+import zzzjoy.config.WxBaseConfig;
 import zzzjoy.dao.BindUserMapper;
 import zzzjoy.service.BindUserService;
-import zzzjoy.util.AesEncodeUtils;
 import zzzjoy.util.AesUtils;
 
-import javax.swing.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +18,8 @@ public class BindUserServiceImpl implements BindUserService {
     private BindUserMapper bindUserMapper;
     @Autowired
     private JwcConfig jwcConfig;
+    @Autowired
+    private WxBaseConfig wxBaseConfig;
 
 
     @Override
@@ -64,12 +64,11 @@ public class BindUserServiceImpl implements BindUserService {
         return (jwcUserList.size() == 1 && jwcUserList.get(0).getUsername().equals(jwcUser.getUsername()));
     }
 
-    // 查询这个用户的创建时间是不是三天内的
+    // 查询这个用户换绑操作是不是在冻结时间内
     public boolean freezeJwcUser(JwcUser jwcUser){
         List<JwcUser> jwcUserList = this.findJwcUserByOpenId(jwcUser.getOpenId());
         Long creatTime = jwcUserList.get(0).getCreatTime().getTime();
         Long curTime = System.currentTimeMillis();
-        // 冻结时间为三天
-        return ((curTime-creatTime)/1000/60/60/24 < 3);
+        return ((curTime-creatTime)/1000/60/60/24 < wxBaseConfig.getFrozenTime());
     }
 }

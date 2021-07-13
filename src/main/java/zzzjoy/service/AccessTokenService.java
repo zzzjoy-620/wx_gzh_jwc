@@ -18,7 +18,13 @@ public class AccessTokenService {
 
     private AccessTokenBean accessTokenBean;
 
-    // 刷新accessToken
+    /**
+     * @Author zzzjoy
+     * @Description 刷新accessToken
+     * @Param appId	微信的appid
+     * @Param appSecret	微信的secret
+     * @Return
+    */
     private void refreshAccessToken(String appId, String appSecret) throws IOException {
         // get数据准备
         HashMap<String, String> map = new HashMap<>();
@@ -36,11 +42,18 @@ public class AccessTokenService {
         this.accessTokenBean = new AccessTokenBean(accessToken, expiresIn);
     }
 
-    // 获取accessToken
+    /**
+     * @Author zzzjoy
+     * @Description 获取accessToken
+     * @Param
+     * @Return accessToken
+    */
     public String getAccessToken() throws IOException {
+        // 不存在就刷新
         if (this.accessTokenBean == null || this.accessTokenBean.expired()){
             this.refreshAccessToken(wxBaseConfig.getAppId(), wxBaseConfig.getSecret());
         }
+        // 存在就直接返回
         return this.accessTokenBean.getAccessToken();
     }
 

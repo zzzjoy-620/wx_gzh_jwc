@@ -7,8 +7,8 @@ import zzzjoy.bean.User;
 
 import java.util.List;
 
-@Mapper
 @Repository
+@Mapper
 public interface UserMapper {
     Integer insertUser(User user);
     List<User> selectUserByOpenId(String openId);
